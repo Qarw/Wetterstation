@@ -173,10 +173,11 @@ class Station implements DatabaseObject, JsonSerializable
         return $this->errors[$field];
     }
 
+    //Deprecated: Return type of Station::jsonSerialize() should either be compatible with JsonSerializable::jsonSerialize(): mixed, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in C:\laragon\www\Wetterstation\models\Station.php on line 177
+    //diese fehlermeldung ist weck
     #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
-       //fehlermeldung weck
         return [
             "id" => intval($this->id),
             "name" => $this->name,
