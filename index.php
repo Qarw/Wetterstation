@@ -21,4 +21,6 @@ if ($controller == 'home') {
     Controller::showError("Page not found", "Page for operation " . $controller . " was not found!");
 }
 
+//Test
+
 ?>
