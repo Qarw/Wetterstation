@@ -1,3 +1,20 @@
+
+function parseMeasurementTable(){
+
+}
+
+function loadAllMeasurements(){
+    $.get('api/measurements', function (data) {
+       console.log(data)
+    });
+}
+
+function loadFilteredMeasurements(){
+
+}
+
+
+
 $(document).ready(function() {
     console.log("in index.js");
     var ctx = document.getElementById('chart').getContext('2d');
