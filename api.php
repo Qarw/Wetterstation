@@ -11,12 +11,12 @@ $controller = sizeof($route) > 0 ? $route[0] : 'measurement';
 if ($controller == 'measurement') {
     require_once('controllers/MeasurementRESTController');
 
-    try {
-        (new MeasurementRESTController())->handleRequest();
+    try{
+        (new MeasurementRESTController()) ->handleRequest();
     } catch (Exception $e) {
-        RESTController::responseHelper($e->getMessage(), $e->getCode());
+       RESTController::responseHelper($e->getMessage(), $e->getCode());
     }
-}    else {
+} else {
         RESTController::responseHelper('REST-Controller "' . $controller . '" not found', '404');
 }
 

@@ -4,14 +4,16 @@
     </div>
     <div class="row">
         <p class="form-inline">
-            <select class="form-control" name="station_id" style="width: 200px">
+            <select class="form-control" name="station_id" style="width: 200px" id="stationName">
                 <?php
-                foreach($model as $station):
-                    echo '<option value="' . $station->getId() . '">' . $station->getName() . '</option>';
+                require_once 'models/Station.php';
+                $station = Station::getAll();
+                foreach($station as $s):
+                    echo '<option value="' . $s->getID() . '">' . $s->getName() . '</option>';
                 endforeach;
                 ?>
             </select>
-            <button id="btnSearch" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Messwerte anzeigen</button>
+            <button id="btnSearch" name ="suchen" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Messwerte anzeigen</button>
             <a class="btn btn-default" href="index.php?r=station/index"><span class="glyphicon glyphicon-pencil"></span> Messstationen bearbeiten</a>
 
             <canvas id="chart" width="400" height="100"></canvas>
@@ -28,6 +30,23 @@
             </tr>
             </thead>
             <tbody id="measurements"></tbody>
+            <?php
+
+            require_once 'models/Measurement.php';
+
+            $measurement = Measurement::getAll();
+
+            foreach ($measurement as $m) {
+                echo "<tr>";
+                echo "<td>" . $m->getTime() . "</td>";
+                echo "<td>" . $m->getTemperature() . "</td>";
+                echo "<td>" . $m->getRain() . "</td>";
+                echo "</tr>";
+            }
+
+            ?>
+
+            </tbody>
         </table>
     </div>
 </div> <!-- /container -->

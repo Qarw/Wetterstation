@@ -144,6 +144,20 @@ class Measurement implements DatabaseObject, JsonSerializable
         Database::disconnect();
     }
 
+    public static function getLatestTemperatures() {
+        $db = Database::connect();
+
+        $sql = "SELECT * FROM measurement ORDER BY time DESC LIMIT 7";
+
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        Database::disconnect();
+
+        return $items;
+    }
+
+
     private function validateTime()
     {
         try {
