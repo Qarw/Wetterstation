@@ -4,7 +4,7 @@ function parseMeasurementTable(){
 }
 
 function loadAllMeasurements(){
-    $.get('api/measurements', function (data) {
+    $.get('api/measurement', function (data) {
        console.log(data)
     });
 }
