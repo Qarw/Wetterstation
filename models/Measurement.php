@@ -147,7 +147,7 @@ class Measurement implements DatabaseObject, JsonSerializable
     public static function getLatestTemperatures() {
         $db = Database::connect();
 
-        $sql = "SELECT * FROM measurement ORDER BY time DESC LIMIT 7";
+        $sql = "SELECT * FROM measurement ORDER BY time DESC LIMIT 10";
 
         $stmt = $db->prepare($sql);
         $stmt->execute();
@@ -156,6 +156,7 @@ class Measurement implements DatabaseObject, JsonSerializable
 
         return $items;
     }
+
 
 
     private function validateTime()

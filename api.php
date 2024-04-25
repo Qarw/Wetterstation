@@ -20,4 +20,4 @@ if ($controller == 'measurement') {
         RESTController::responseHelper('REST-Controller "' . $controller . '" not found', '404');
 }
 
-?>
+

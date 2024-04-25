@@ -4,31 +4,36 @@ $(document).ready(function() {
             url: './lastTemperaturesApi.php', // Änderung der URL zur API
             dataType: 'json',
             success: function(data) {
-                const temperatures = data.map(entry => entry.temperature); // Annahme: data enthält ein Array von Objekten mit Temperaturdaten
-                updateChart(temperatures);
-                console.log("in index.js");
-            },
-            error: function(xhr, status, error) {
-                console.error('Error fetching temperature:', error);
-                console.log('XHR status:', xhr.status);
-                console.log('XHR response:', xhr.responseText);
+                const temperatures = data.map(entry => entry.temperature);
+                const rain = data.map(entry => entry.rain);
+                const time = data.map(entry => entry.time);
+                updateChart(temperatures, rain, time);
             }
+
         });
     }
 
-    function updateChart(temperatures) {
+    function updateChart(temperatures, rain, time) {
         var ctx = document.getElementById('chart').getContext('2d');
         var chart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"],
+                labels: ["Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag",],
                 datasets: [{
                     label: "Temperatur [°C]",
-                    data: temperatures, // Stelle sicher, dass temperatures ein Array mit den Temperaturdaten für jeden Tag ist
+                    data: temperatures,
                     borderColor: 'rgb(75, 192, 192)',
                     backgroundColor: 'rgb(75, 192, 192)',
                     fill: false,
                     tension: 0
+                },
+                    {
+                        label: "Regenmenge [mm]",
+                        data: rain,
+                        borderColor: 'rgb(192, 75, 192)',
+                        backgroundColor: 'rgb(192, 75, 192)',
+                        fill: false,
+                        tension: 0
                 }]
             },
             options: {
@@ -38,7 +43,7 @@ $(document).ready(function() {
                         position: 'left',
                         ticks: {
                             beginAtZero: true,
-                            max: 25
+                            max: 40
                         }
                     }]
                 }

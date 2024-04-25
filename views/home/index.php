@@ -34,15 +34,17 @@
 
             require_once 'models/Measurement.php';
 
-            $measurement = Measurement::getAll();
+            $measurements = Measurement::getAll();
+            $reversedMeasurements = array_reverse($measurements);
 
-            foreach ($measurement as $m) {
+            foreach ($reversedMeasurements as $m) {
                 echo "<tr>";
                 echo "<td>" . $m->getTime() . "</td>";
                 echo "<td>" . $m->getTemperature() . "</td>";
                 echo "<td>" . $m->getRain() . "</td>";
                 echo "</tr>";
             }
+
 
             ?>
 
