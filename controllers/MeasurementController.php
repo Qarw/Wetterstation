@@ -13,8 +13,12 @@ class MeasurementController extends Controller
     {
         $operation = sizeof($route) > 1 ? $route[1] : 'index';
         $id = isset($_GET['id']) ? $_GET['id'] : 0;
-        if ($operation == 'view') {
+        if ($operation == 'index') {
+            $this->actionIndex();
+        }elseif ($operation == 'view') {
             $this->actionView($id);
+        }elseif ($operation == 'create') {
+            $this->actionCreate();
         } elseif ($operation == 'update') {
             $this->actionUpdate($id);
         } elseif ($operation == 'delete') {
@@ -22,6 +26,30 @@ class MeasurementController extends Controller
         } else {
             Controller::showError("Page not found", "Page for operation " . $operation . " was not found!");
         }
+    }
+
+    public function actionCreate()
+    {
+        $model = new Measurement();
+
+        if (!empty($_POST)) {
+            $model->setTemperature($this->getDataOrNull('temperature'));
+            $model->setRain($this->getDataOrNull('rain'));
+            $model->setStation($this->getDataOrNull('station'));
+
+            if ($model->save()) {
+                $this->redirect('measurement/index');
+                return;
+            }
+        }
+
+        $this->render('measurement/create', $model);
+    }
+
+    public function actionIndex()
+    {
+        $model = Measurement::getAll();
+        $this->render('measurement/index', $model);
     }
 
     public function actionView($id)

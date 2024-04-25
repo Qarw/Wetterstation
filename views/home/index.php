@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <h2>Awesome Wetterstation</h2>
+        <h2>Bosnische Wetterstation</h2>
     </div>
     <div class="row">
         <p class="form-inline">
@@ -15,6 +15,7 @@
             </select>
             <button id="btnSearch" name ="suchen" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Messwerte anzeigen</button>
             <a class="btn btn-default" href="index.php?r=station/index"><span class="glyphicon glyphicon-pencil"></span> Messstationen bearbeiten</a>
+            <a class="btn btn-default" href="index.php?r=measurement/index"><span class="glyphicon glyphicon-pencil"></span> Messwerte bearbeiten</a>
 
             <canvas id="chart" width="400" height="100"></canvas>
 

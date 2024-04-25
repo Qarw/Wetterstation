@@ -1,7 +1,7 @@
 $(document).ready(function() {
     function getTemperature() {
         $.ajax({
-            url: './lastTemperaturesApi.php', // Änderung der URL zur API
+            url: './lastTemperaturesApi.php',
             dataType: 'json',
             success: function(data) {
                 const temperatures = data.map(entry => entry.temperature);
@@ -18,7 +18,7 @@ $(document).ready(function() {
         var chart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ["Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag",],
+                labels: time,
                 datasets: [{
                     label: "Temperatur [°C]",
                     data: temperatures,

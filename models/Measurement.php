@@ -101,13 +101,37 @@ class Measurement implements DatabaseObject, JsonSerializable
 
     public static function getAll() {
         $db = Database::connect();
-
-        $sql = "SELECT * FROM measurement ORDER BY time ASC";
-
+        $sql = "SELECT m.*, s.id, s.name, s.altitude, s.location
+                FROM measurement m JOIN station s ON m.station_id = s.id";
         $stmt = $db->prepare($sql);
         $stmt->execute();
-        $items = $stmt->fetchAll(PDO::FETCH_CLASS, 'Measurement');
+        $d = $stmt->fetchAll(PDO::FETCH_ASSOC);
         Database::disconnect();
+
+        $items = [];
+
+        foreach ($d as $item) {
+
+            if ($item == null) {
+                return null;
+            } else {
+                $station = new Station();
+                $station->setId($item['id']);
+                $station->setName($item['name']);
+                $station->setAltitude($item['altitude']);
+                $station->setLocation($item['location']);
+                $measurement = new Measurement();
+                $measurement->setId($item['id']);
+                $measurement->setTime($item['time']);
+                $measurement->setTemperature($item['temperature']);
+                $measurement->setRain($item['rain']);
+                $measurement->setStationId($item['station_id']);
+                $measurement->setStation($station);
+                array_push($items, $measurement);
+            }
+
+        }
+
 
         return $items;
     }
@@ -147,7 +171,7 @@ class Measurement implements DatabaseObject, JsonSerializable
     public static function getLatestTemperatures() {
         $db = Database::connect();
 
-        $sql = "SELECT * FROM measurement ORDER BY time DESC LIMIT 10";
+        $sql = "SELECT * FROM measurement ORDER BY time DESC LIMIT 100";
 
         $stmt = $db->prepare($sql);
         $stmt->execute();
@@ -156,7 +180,6 @@ class Measurement implements DatabaseObject, JsonSerializable
 
         return $items;
     }
-
 
 
     private function validateTime()
