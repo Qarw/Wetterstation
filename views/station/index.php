@@ -30,6 +30,8 @@
                 echo '<a class="btn btn-primary" href="index.php?r=station/update&id=' . $c->getId() . '"><span class="glyphicon glyphicon-pencil"></span></a>';
                 echo '&nbsp;';
                 echo '<a class="btn btn-danger" href="index.php?r=station/delete&id=' . $c->getId() . '"><span class="glyphicon glyphicon-remove"></span></a>';
+                echo '&nbsp;';
+                echo '<a class="btn btn-info" href="https://www.google.at/maps/place/' . $c->getLocation() . '"><span class="glyphicon glyphicon-globe"></span></a>';
                 echo '</td>';
                 echo '</tr>';
             }
