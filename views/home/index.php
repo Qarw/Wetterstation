@@ -16,7 +16,7 @@
 
                 ?>
             </select>
-            <script> //etz geat der scheiss
+            <script>
                 function reloadPage() {
                     var selectedItem = document.getElementById("stationName");
                     location.href = "http://localhost/Wetterstation/?station=" + (selectedItem.selectedIndex + 1 );
